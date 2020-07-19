@@ -1,4 +1,4 @@
-
+var PORT = process.env.PORT || 3000;
 var express = require('express');
 require('dotenv').config();
 var coder = require('nodejs-base64-encode');
@@ -8,8 +8,8 @@ var nodemailer = require('nodemailer');
 var cookieParser = require('cookie-parser');
 
 // hosts
-const serverHostName = 'http://localhost:3000/';
-const frontEndHostName = 'http://localhost:8887/';
+// const serverHostName = `${process.env.HOST}:${PORT}/`;
+const frontEndHostName = `${process.env.HOST}:${process.env.PORT_FRONT}/`;
 
 const cors = require('cors');
 var path = require('path');
@@ -160,8 +160,8 @@ app.post('/sendEmail', (req, res) => {
   res.end()
 })
 
-app.listen(3000, () => {
-  console.log(`Server running at ${serverHostName} ✔`);
+app.listen(PORT, () => {
+  console.log(`Server running at ${process.env.HOST}:${PORT} ✔`);
 });
 
 
