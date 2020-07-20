@@ -1,0 +1,121 @@
+<script type= "text/javascript">
+    $(document).ready( function() {
+      $('#submit').on('click', function(e) {
+        e.preventDefault();
+        preview();
+      });
+    });
+    function preview(){   
+      var first_Name =  $(firstName).val();       
+      var firstNameLabel = $('label[for="firstName"]').text();
+      var last_name = $(lastName).val();
+      var lastNameLabel = $('label[for="lastName"]').text()
+      var name_data = '<p><strong>' + firstNameLabel + '</strong> : ' + first_Name + " " + '<strong>' + ' ' + lastNameLabel + '</strong> : ' + last_name + '</p>';
+
+      var E_mail = $(inputEmail).val();
+      var E_mailLabel = $('label[for="inputEmail"]').text()
+      var E_mail_data = '<p><strong>' + E_mailLabel + '</strong> : ' + E_mail + '</p>';
+
+      var team_Name = $("#teamName").val(); 
+      var team_NameLabel = $('label[for="teamName"]').text();
+      var team_Name_data = '<p><strong>' + team_NameLabel + '</strong> : ' + team_Name + '</p>';
+
+      var team_members_names = new Array();
+      var team_mems_names = $(".team_members_names").each(function (){
+        // console.log($(this).val());
+        team_members_names.push($(this).val());
+      }); 
+      var team_members_emails = new Array();
+      var team_mem_emails = $(".team_members_emails").each(function (){
+        // console.log($(this).val());
+        team_members_emails.push($(this).val());
+      });
+    
+      var team_membersLabel = $('label[for="names"]').text();
+
+      var team_members_data = '<strong>' + team_membersLabel + '</strong>\n';
+      for (i = 0; i < team_members_names.length; i++){
+        team_members_data += '<p>' + team_members_names[i] + ' ' + team_members_emails[i] + '</p>';
+       }
+      
+
+      var data = name_data + E_mail_data + team_Name_data + team_members_data;
+
+
+
+      $('#preview_data').html('');
+      $('#preview_data').append(data);
+      $('#preview_data').dialog({
+      resizable: false,
+      height: 1000,
+      width: 1500,
+      modal: true,
+      buttons: {
+        'Submit': function(e) {
+          //submit the form
+          // $("#form").submit();
+          // e.preventDefault();
+          
+//             $.ajax({
+//             data:$('#form').serialize(),
+//             dataType: 'jsonp',
+//             crossDomain: true,
+//             type: "POST",
+//               url: 'http://localhost:3000/createUser',
+//             success: () => {
+//               console.log('hello')
+//               // window.location.href = "./emailCompose.html";
+//             }
+// });
+            $.ajax({
+                    type: 'POST',
+                    timeout: 2000,
+                    url: $(this).attr('http://localhost:3000/createUser'),
+                    dataType: 'json',
+                    // success: function(json) {
+                    //   window.location.href = "http://localhost:8887/frontend/emailCompose.html";
+                    // }
+                    data:$('#form').serialize(),
+                    success: function(data){
+                      alert('success');
+                    },
+                    error: function(data){
+                      alert('error');
+                    },
+                    complete: function(data) {
+                      alert('complete')
+                    }
+                })
+                return false;
+
+
+
+
+
+    //   $.ajax({
+    //   url:'http://localhost:3000/createUser',
+    //   type:'post',
+    //   // data:$('#form').serialize(),
+    //   dataType: 'jsonp',
+    //     cors: true ,
+    //     contentType:'application/json',
+    //     secure: true,
+    //     headers: {
+    //       'Access-Control-Allow-Origin': '*',
+    //     }
+    //   // success:function(){
+    //   //     //whatever you wanna do after the form is successfully submitted
+    //   // }
+    // }
+    // );
+          $(this).dialog("close");
+        },
+        Cancel: function() {
+          $(this).dialog("close");
+        }
+      }
+  });
+}
+</script>
+
+  

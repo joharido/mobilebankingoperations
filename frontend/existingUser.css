@@ -1,0 +1,10 @@
+body{
+    /* background-image: linear-gradient(to right, #5954b4 , #4848ff, #00d4ff); */
+    background: rgb(236,240,250);
+    background: radial-gradient(circle, rgba(236,240,250,1) 0%, rgba(133,177,230,1) 100%);
+    font-family: Poppins; 
+  }
+
+.hidden{
+  display: none !important;
+}
