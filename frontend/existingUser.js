@@ -30,11 +30,9 @@ $(".validate").click(() => {
         
                         console.log("done");
                     } else {
-                        // console.log("tf!! its not valid!");
                         notValid()
                     }
                 } else {
-                    //  console.log("this is not a json file");
                     notValid()
                 }
             }
@@ -43,7 +41,9 @@ $(".validate").click(() => {
         console.log("its empty");
         emptyInputAlert();
     }
-    // window.location.replace("http://localhost:8887/frontend/landingPage.html")
+})
+$("#home").click(() => {
+    window.location.replace("./mini.html")
 })
 
 function isJson(str) {
