@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+    <!-- notification pluggin -->
+    <script src="./node_modules/notiflix/dist/notiflix-2.3.3.min.js"></script>
+    <link rel="stylesheet" href="./node_modules/notiflix/dist/notiflix-2.3.3.min.css" />
+
+
+     <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./landingPage.css">
+</head>
+<body>
+    <section class="signup">
+        <div class="container">
+            <button id="home" class="btn btn-primary float-right mt-3 btn-md">Home</button>
+            
+
+            <div class="signup-content">
+                <div class="signup-form">
+                    
+                    <h2 class="title mb-5">Landing Page</h2>
+                    
+                    <div class="firstNameLabel"><strong>First Name: </strong></div>
+                    <div class="firstName" style="white-space: pre-wrap"></div>
+
+                    <div class="lastNameLabel"><strong><br>Last Name: </strong></div>
+                    <div class="lastName" style="white-space: pre-wrap"></div>
+
+                    <div class="emailLabel"><strong><br>Email: </strong></div>
+                    <div class="email" style="white-space: pre-wrap"></div>
+
+                    <div class="teamNameLabel"><strong><br> Team Name: </strong></div>
+                    <div class="teamName" style="white-space: pre-wrap"></div>
+
+                    <!-- <div class="memberInfoHeader"><strong>Members Info: </strong></div> -->
+                    <div class="memberInfoLabel"><strong><br>Members Info: </strong></div>
+                    <div class="memberInfo" style="white-space: pre-wrap"></div>
+                    <div>
+                        <table id="memberTable">
+                            <tr class="tableHeader">
+                                <th>Name</th>
+                                <th>Email</th>
+                                <!-- <th>Assigned to</th> -->
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- <div class="emailHistoryLabel"><strong><br>Email History:</strong><br></div>
+                    <div class="emailHistory" style="white-space: pre-wrap">No recent emails found!</div> -->
+
+                    <button id="sendEmail" class="btn btn-primary mt-3 mr-3 btn-md float-right">Send Email</button>
+                    
+                    <button id="saveChanges" class="btn btn-success mt-3 mr-3 btn-md hidden float-right">Save Changes</button>
+                    <button id="edit" class="btn btn-danger mt-3 mr-3 btn-md float-right">Edit</button>
+                    
+                    
+                </div>
+                <button class="btn btn-outline-primary mt-3 ml-3 float-right encrypt btn-md" >Key</button>
+
+            </div>
+        </div>
+        
+    </section>
+    
+
+    <script src="./landingPage.js"></script> 
+
+</body>
+</html>

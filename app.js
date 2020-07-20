@@ -9,7 +9,7 @@ var cookieParser = require('cookie-parser');
 
 // hosts
 // const serverHostName = `${process.env.HOST}:${PORT}/`;
-const frontEndHostName = `${process.env.HOST}:${process.env.PORT_FRONT}/`;
+// const HOSTNAME = `${process.env.HOST}:${process.env.PORT_FRONT}/`;
 
 const cors = require('cors');
 var path = require('path');
@@ -24,6 +24,7 @@ const app = express();
 var bodyParser = require('body-parser');
 const { body } = require('express-validator');
 
+app.use("/", express.static("frontend"))
 var corsOptions = {
   origin: '*',
   credentials: true
@@ -49,6 +50,11 @@ app.use(express.urlencoded({
 app.use(express.json({ type: 'application/*+json' }));
 
 // app.post()
+
+
+app.get('/', (req, res) => {
+  res.redirect('./mini.html')
+})
 
 app.post('/createUser', urlencodedParser, function (req, res) {
   // console.log("bloop");
@@ -83,7 +89,7 @@ app.post('/createUser', urlencodedParser, function (req, res) {
 
   // set a cookie for authenticated to true
   res.cookie('authenticated', true);
-  res.redirect(`${frontEndHostName}frontend/landingPage.html`);
+  res.redirect(`./landingPage.html`);
   res.end();
 })
 
@@ -131,6 +137,9 @@ app.post('/sendEmail', (req, res) => {
   }
 
 
+  app.get('*', (req, res) => {
+    res.redirect('./404page.html')
+  })
 
 
 
@@ -156,12 +165,12 @@ app.post('/sendEmail', (req, res) => {
   //   });
   // }
 
-  res.redirect(`${frontEndHostName}/frontend/emailSentConfirmation.html`)
+  res.redirect(`./emailSentConfirmation.html`)
   res.end()
 })
 
 app.listen(PORT, () => {
-  console.log(`Server running at ${process.env.HOST}:${PORT} ✔`);
+  console.log(`Server running at ${process.env.HOST || 'http://localhost:3000/'} ✔`);
 });
 
 
@@ -188,7 +197,7 @@ app.listen(PORT, () => {
 
   }
 
-  res.redirect('http://localhost:8887/frontend/landingPage.html');
+  res.redirect('http://localhost:8887/landingPage.html');
   res.end();
 }) */
 
