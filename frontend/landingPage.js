@@ -29,17 +29,7 @@ var hostName = "http://localhost:3000/"
 
 // 404 redirect
 $(document).ready(function () {
-    // addAttr();
-    // $("#saveChanges").click());
-    // $("#edit").click();
-    // 
-    // $(".button").click(() =>{
-    // console.log("user list", value.user);
-    // console.log(value.firstName);
-    // console.log(value.user[0].assigned_to);
-
-    // })
-
+   
     //adding values from the cookie
     firstName.append(value.firstName);
     lastName.append(value.lastName);
