@@ -142,29 +142,6 @@ app.post('/sendEmail', (req, res) => {
   })
 
 
-
-  // for (var i = 0; i < req.cookies['body'].user.length; i++) {
-  //   console.log('coobikies', req.cookies['body'])
-  //   var assignedNum = req.cookies['body'].user[i].assigned_to;
-  //   var assignedToUser = req.cookies['body'].user[assignedNum].user_info;
-  //   var currentUser = req.cookies['body'].user[i].user_info;
-  //   const mailOptions = {
-  //     from: 'randomize@bubble.com',
-  //     to: req.cookies["body"].user[i].email_info,
-  //     subject: 'RBC Mobile Banking Operations',
-  //     html: `Hello ${currentUser}, you are assigned to ${assignedToUser}.`
-  //      + '<p>'  + req.body.emailBody + '</p>'
-  //   };
-
-  //   transporter.sendMail(mailOptions, function (error, info) {
-  //     if (error) {
-  //       console.log(error);
-  //     } else {
-  //       console.log('Email sent: ' + info.response);
-  //     }
-  //   });
-  // }
-
   res.redirect(`./emailSentConfirmation.html`)
   res.end()
 })
