@@ -29,7 +29,7 @@ var hostName = "http://localhost:3000/"
 
 // 404 redirect
 $(document).ready(function () {
-   
+    
     //adding values from the cookie
     firstName.append(value.firstName);
     lastName.append(value.lastName);
@@ -40,18 +40,11 @@ $(document).ready(function () {
 
     //Adding team member names
     for (var i = 0; i < value.user.length; i++) {
-        // console.log(value.user[i].user_info);
         team_members_names.push(value.user[i].user_info);
     }
-    // console.log("names", team_members_names);
-
 
     var team_members_emails = new Array();
-    // var team_mem_emails = $(".team_members_emails").each(function (){
-    //   console.log($(this).val());
-    //   team_members_emails.push($(this).val());
-    // });
-
+    
     for (var i = 0; i < value.user.length; i++) {
         // console.log(value.user[i].user_info);
         team_members_emails.push(value.user[i].email_info);
@@ -67,13 +60,6 @@ $(document).ready(function () {
         memberTable.after('<tr><td class="td">' + team_members_names[i] + '</td><td class="td">' + team_members_emails[i])
         // + '</td><td>' + value.user[value.user[i].assigned_to].user_info + '</td></tr>'
     }
-
-    // var memberInfo = document.querySelector(".memberInfo");
-
-
-
-    // console.log(memberInfo);
-
 
 });
 
@@ -91,17 +77,8 @@ $("#home").click(() => {
 $("#edit").on("click", () => {
     $("#edit").toggle(".hidden");
     $("#saveChanges").toggle(".hidden");
-    // firstName.attr('contenteditable', true)
     addAttr();
-    // $('body').on('click', '[contenteditable]', function(){
-    //     var $element = $(this);
-    //     var $input = $('<input/>').val( $element.text());
-    //     var save = function(){
-    //         var $divs = $('<div contenteditable />').text( $input.val() );
-    //         $input.replaceWith( $divs );
-    //       };
-    //     //   $input.on('blur', save).focus(); 
-    //     }); 
+    
 
 })
 $("#saveChanges").on("click", () => {
@@ -192,26 +169,11 @@ $(".encrypt").click(() => {
             );
         }
     });
-    // var new_cookie = JSON.parse($.cookie("body").slice(2));
-    // console.log(new_cookie);
-    // encrypt = window.btoa(JSON.stringify(new_cookie));
-    // console.log(encrypt);
-    // console.log(JSON.parse(window.atob(encrypt)))
-    // key();
-    // console.log(encrypt.length);
-    // $.ajax({
-    //     url: 'http://localhost:3000/encryption',
-    //     type: "GET",
-    //     success: (result) => {
-    //         console.log(result)
-    //     }
-    // })
-
-    //     $.get('http://localhost:3000/encryption', {}, function(encryption){
-    //         console.log(encryption)
-    //    });
+   
 })
-
+// window.addEventListener("hashchange", function(e) {
+//     window.location.replace("./mini.html")
+//   })
 
 function addAttr() {
     firstName.attr('contenteditable', true);
@@ -228,16 +190,4 @@ function removeAttr() {
     memberTable.removeAttr('contenteditable');
 
     $('.td').removeAttr('contenteditable');
-    // console.log(JSON.stringify(firstName.text()));
-    // console.log(firstName.text());
-    // $.cookie("body", team_members_data);
-    // console.log(team_members_data)
-    // document.cookie= "body=team_members_data";
-
-    // var value = JSON.parse($.cookie("body").slice(2));
-    // console.log(JSON.parse(team_members_data.slice(2)), value)
-    // $.removeCookie("body", {path: '/frontend'});
-    // $.cookie("body", team_members_data, { path: '/frontend' })
-    // console.log(JSON.parse($.cookie("body").slice(2)));
-    // console.log(JSON.parse($.cookie("body").slice(2)).firstName);
 }
