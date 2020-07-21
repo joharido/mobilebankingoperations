@@ -135,16 +135,15 @@ app.post('/sendEmail', (req, res) => {
       }
     });
   }
-
-
-  app.get('*', (req, res) => {
-    res.redirect('./404page.html')
-  })
-
-
   res.redirect(`./emailSentConfirmation.html`)
   res.end()
 })
+
+
+app.get('*', (req, res) => {
+  res.redirect('./404page.html')
+})
+
 
 app.listen(PORT, () => {
   console.log(`Server running at ${process.env.HOST || 'http://localhost:3000/'} ✔`);
