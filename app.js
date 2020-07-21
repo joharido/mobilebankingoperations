@@ -135,10 +135,10 @@ app.post('/sendEmail', (req, res) => {
       }
     });
   }
+
   res.redirect(`./emailSentConfirmation.html`)
   res.end()
 })
-
 
 app.get('*', (req, res) => {
   res.redirect('./404page.html')
