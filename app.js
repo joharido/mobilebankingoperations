@@ -1,5 +1,6 @@
 var PORT = process.env.PORT || 3000;
 var express = require('express');
+var session  = require('express-session');
 require('dotenv').config();
 var coder = require('nodejs-base64-encode');
 var fs = require('fs');
@@ -7,16 +8,11 @@ var formidable = require('formidable');
 var nodemailer = require('nodemailer');
 var cookieParser = require('cookie-parser');
 
-// hosts
-// const serverHostName = `${process.env.HOST}:${PORT}/`;
-// const HOSTNAME = `${process.env.HOST}:${process.env.PORT_FRONT}/`;
 
 const cors = require('cors');
 var path = require('path');
-// var cors = require('cors')
 var i;
 var assigned_to;
-//var assignee = {};
 indices = [];
 var pickedIndex;
 
@@ -48,8 +44,11 @@ app.use(express.urlencoded({
 }));
 
 app.use(express.json({ type: 'application/*+json' }));
-
-// app.post()
+app.use(session({
+  secret: 'secret-key',
+  resave: false,
+  saveUninitialized: false,
+}));
 
 
 app.get('/', (req, res) => {
@@ -57,16 +56,18 @@ app.get('/', (req, res) => {
 })
 
 app.post('/createUser', urlencodedParser, function (req, res) {
-  // console.log("bloop");
+  if (!req.session.viewCount){
+    req.session.viewCount = 1;
+  } else{
+    req.session.viewCount += 1;
+  }
+  
   var length = req.body.user.length;
-  var recepients = [];
-  var jsonData = req.body;
+  // var jsonData = req.body;
 
   //Randomize the user selection
-
   for (var i = 0; i < length; i++) {
     indices.push(i);
-
   }
 
   for (var j = 0; j < length; j++) {
@@ -80,7 +81,7 @@ app.post('/createUser', urlencodedParser, function (req, res) {
     indices.splice(pickedIndex, 1);
     console.log(indices);
   }
-  console.log(req.body.user);
+  // console.log(req.body.user);
 
   res.cookie("body", 'j=' + JSON.stringify(req.body))
 
