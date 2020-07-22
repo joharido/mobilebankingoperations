@@ -87,7 +87,7 @@ app.post('/createUser', urlencodedParser, function (req, res) {
 
   // set a cookie for authenticated to true
   res.cookie('authenticated', true);
-  res.redirect(`./landingPage.html`);
+  res.redirect('./initialEmail')
   res.end();
 })
 
@@ -138,6 +138,44 @@ app.post('/sendEmail', (req, res) => {
   res.end()
 })
 
+
+//SENDING INTIAL EMAIL
+app.get('/initialEmail', (req, res) => {
+  //do a cookie check
+  var body = JSON.parse(req.cookies['body'].slice(2));
+  var authenticated = JSON.parse(req.cookies['authenticated']);
+  console.log(typeof authenticated)
+  console.log(authenticated && authenticated === true && body)
+  if (authenticated && authenticated === true && body) {
+    var users = body.user;
+    for (var i = 0; i < users.length; i++){
+      var assignedNum = users[i].assigned_to;
+      var assignedToUser = users[assignedNum].user_info;
+      var currentUser = users[i].user_info;
+      const mailOptions = {
+        from: 'randomize@bubble.com',
+        to: users[i].email_info,
+        subject: 'RBC Mobile Banking Operations',
+        html: `Hello ${currentUser}, you are assigned to ${assignedToUser}.`
+      };
+
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
+    }
+    res.redirect('./landingPage.html')
+  }
+  else {
+    res.redirect('./404page.html')
+  }
+  res.end();
+}) 
+
+
 app.get('*', (req, res) => {
   res.redirect('./404page.html')
 })
@@ -146,34 +184,6 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running at ${process.env.HOST || 'http://localhost:3000/'} ✔`);
 });
-
-
-//SENDING INTIAL EMAIL: COMING SOON
-/*app.get('/initialEmail', (req, res) => {
-  for (var i = 0; i < req.cookies['body'].user.length; i++) {
-    console.log('coobikies', req.cookies['body'])
-    var assignedNum = req.cookies['body'].user[i].assigned_to;
-    var assignedToUser = req.cookies['body'].user[assignedNum].user_info;
-    const mailOptions = {
-      from: 'randomize@bubble.com',
-      to: req.cookies["body"].user[i].email_info,
-      subject: 'hello there!',
-      html: `Hello, you are assigned to ${assignedToUser}.`
-    };
-
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Email sent: ' + info.response);
-      }
-    });
-
-  }
-
-  res.redirect('http://localhost:8887/landingPage.html');
-  res.end();
-}) */
 
 
 
