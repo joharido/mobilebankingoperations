@@ -66,25 +66,22 @@ app.post('/createUser', urlencodedParser, function (req, res) {
   // var jsonData = req.body;
 
   //Randomize the user selection
-  for (var i = 0; i < length; i++) {
+  for (var i = 0; i < req.body.user.length; i++) {
     indices.push(i);
   }
 
-  for (var j = 0; j < length; j++) {
-    // console.log(indices);
+  for (var j = 0; j < req.body.user.length; j++) {
+    console.log(indices);
     pickedIndex = Math.floor(Math.random() * indices.length);
-    while (indices[pickedIndex] == j) {
+    while (pickedIndex == j) {
       pickedIndex = Math.floor(Math.random() * indices.length);
     }
     req.body.user[j].assigned_to = indices[pickedIndex];
     req.body.user[indices[pickedIndex]].assignee = j;
     indices.splice(pickedIndex, 1);
-    // console.log(indices);
   }
-  // console.log(req.body.user);
 
   res.cookie("body", 'j=' + JSON.stringify(req.body))
-
 
   // The user has been created properly and is authenticated
 
